@@ -1,4 +1,4 @@
-package com.chainalysis.k8demo;
+package hello.service;
 
 import io.micronaut.runtime.Micronaut;
 

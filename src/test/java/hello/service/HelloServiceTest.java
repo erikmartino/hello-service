@@ -1,17 +1,17 @@
-package com.chainalysis.k8demo;
+package hello.service;
 
 import io.micronaut.runtime.EmbeddedApplication;
-import io.micronaut.test.annotation.MicronautTest;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 @MicronautTest
-public class HelloServiceTest {
+class HelloServiceTest {
 
     @Inject
-    EmbeddedApplication application;
+    EmbeddedApplication<?> application;
 
     @Test
     void testItWorks() {
