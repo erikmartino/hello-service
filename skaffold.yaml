@@ -6,3 +6,11 @@ build:
       jib: {}
   tagPolicy:
     gitCommit: {}
+deploy:
+  helm:
+    releases:
+      - name: hello-service
+        chartPath: helm/hello-service
+        artifactOverrides:
+          image: xylifyx/hello-service
+
