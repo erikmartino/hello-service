@@ -1,4 +1,4 @@
-apiVersion: skaffold/v2alpha1
+apiVersion: skaffold/v2beta5
 kind: Config
 build:
   artifacts:
@@ -12,5 +12,8 @@ deploy:
       - name: hello-service
         chartPath: helm/hello-service
         artifactOverrides:
-          image: xylifyx/hello-service
-
+          image.repository: xylifyx/hello-service
+portForward:
+  - resourceType: deployment
+    resourceName: hello-service
+    port: 8080

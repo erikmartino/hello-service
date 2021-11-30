@@ -1,3 +1,7 @@
 micronaut:
   application:
     name: helloService
+endpoints:
+  health:
+    enabled: true
+    details-visible: ANONYMOUS
