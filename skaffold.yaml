@@ -13,6 +13,8 @@ deploy:
         chartPath: helm/hello-service
         artifactOverrides:
           image.repository: xylifyx/hello-service
+        setValues:
+          replicaCount: "5"
 portForward:
   - resourceType: deployment
     resourceName: hello-service
