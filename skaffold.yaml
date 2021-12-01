@@ -14,7 +14,7 @@ deploy:
         artifactOverrides:
           image.repository: xylifyx/hello-service
         setValues:
-          replicaCount: "5"
+          replicaCount: "1"
 portForward:
   - resourceType: deployment
     resourceName: hello-service
