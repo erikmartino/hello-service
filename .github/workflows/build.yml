@@ -14,6 +14,7 @@ jobs:
         uses: hiberbee/github-action-skaffold@1.12.0
         with:
           command: build
+          verbosity: trace
           repository: ${{ env.REGISTRY }}
           image: ${{ env.IMAGE_NAME }}
           tag: ${{ github.sha }}
