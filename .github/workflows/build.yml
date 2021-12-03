@@ -19,4 +19,4 @@ jobs:
         with:
           skaffold: 1.35.0
       - name: Build Docker images
-        run: skaffold build --default-repo=ghcr.io/${{ github.repository_owner }}
+        run: skaffold build --default-repo=ghcr.io/${{ github.repository }}
