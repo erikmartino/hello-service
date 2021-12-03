@@ -18,5 +18,11 @@ jobs:
         uses: yokawasa/action-setup-kube-tools@v0.8.0
         with:
           skaffold: 1.35.0
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build Docker images
         run: skaffold build --default-repo=ghcr.io/${{ github.repository }}
