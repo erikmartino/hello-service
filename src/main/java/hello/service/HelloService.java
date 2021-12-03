@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 import java.util.Map;
 
 @Validated
-@Controller("/")
+@Controller("/hello")
 public class HelloService {
     @Get()
     public Map<String,Object> getGreeting() throws UnknownHostException {

@@ -1,0 +1,19 @@
+name: Publish docker image
+on:
+  push:
+    branches: ['master']
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+jobs:
+  skaffold-build:
+    name: Skaffold build
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Build Docker images
+        uses: hiberbee/github-action-skaffold@1.12.0
+        with:
+          command: build
+          repository: ${{ env.REGISTRY }}
+          image: ${{ env.IMAGE_NAME }}
+          tag: ${{ github.sha }}
