@@ -15,8 +15,6 @@ jobs:
           java-version: 11
           distribution: adopt-hotspot
       - name: Set up skaffold
-        uses: daisaru11/setup-cd-tools@v1
-        with:
-          skaffold: '1.35.0'
+        uses: yokawasa/action-setup-kube-tools@v0.8.0
       - name: Build Docker images
         run: skaffold build --default-repo=ghcr.io/${{ env.GITHUB_REPOSITORY }}
