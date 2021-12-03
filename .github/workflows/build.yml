@@ -16,5 +16,7 @@ jobs:
           distribution: adopt-hotspot
       - name: Set up skaffold
         uses: yokawasa/action-setup-kube-tools@v0.8.0
+        with:
+          skaffold: 1.35.0
       - name: Build Docker images
         run: skaffold build --default-repo=ghcr.io/${{ env.GITHUB_REPOSITORY }}
