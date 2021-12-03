@@ -2,7 +2,7 @@ apiVersion: skaffold/v2beta5
 kind: Config
 build:
   artifacts:
-    - image: xylifyx/hello-service
+    - image: hello-service
       jib: {}
   tagPolicy:
     gitCommit: {}
@@ -12,7 +12,7 @@ deploy:
       - name: hello-service
         chartPath: helm/hello-service
         artifactOverrides:
-          image.repository: xylifyx/hello-service
+          image.repository: hello-service
         setValues:
           replicaCount: "1"
 portForward:

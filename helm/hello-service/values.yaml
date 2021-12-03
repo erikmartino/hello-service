@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: xylifyx/hello-service
+  repository: hello-service
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
