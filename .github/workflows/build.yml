@@ -10,6 +10,8 @@ jobs:
     name: Skaffold build
     runs-on: ubuntu-20.04
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
       - name: Build Docker images
         uses: hiberbee/github-action-skaffold@1.14.0
         with:
