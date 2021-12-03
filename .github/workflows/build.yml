@@ -3,8 +3,7 @@ on:
   push:
     branches: ['master']
 env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  REPOSITORY: ghcr.io/${{ env.GITHUB_REPOSITORY }}
 jobs:
   skaffold-build:
     name: Skaffold build
@@ -12,11 +11,11 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-      - name: Build Docker images
-        uses: hiberbee/github-action-skaffold@1.14.0
+      - name: Set up Java
+        uses: actions/setup-java@v2
+      - name: Set up skaffold
+        uses: daisaru11/setup-cd-tools@v1
         with:
-          command: build
-          verbosity: trace
-          repository: ${{ env.REGISTRY }}
-          image: ${{ env.IMAGE_NAME }}
-          tag: ${{ github.sha }}
+          skaffold: '1.35.0'
+      - name: Build Docker images
+        run: skaffold build --default-repo=${{ env.REPOSITORY }}
