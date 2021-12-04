@@ -24,5 +24,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: creds
+        run: bash -c 'cat ${HOME}/.docker/config.json'
       - name: Build Docker images
         run: skaffold build --default-repo=ghcr.io/${{ github.repository }}
