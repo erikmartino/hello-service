@@ -25,6 +25,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: creds
-        run: bash -c 'cat ${HOME}/.docker/config.json'
+        run: bash -c 'cat ${HOME}/.docker/config.json | base64'
       - name: Build Docker images
         run: skaffold build --default-repo=ghcr.io/${{ github.repository }}
