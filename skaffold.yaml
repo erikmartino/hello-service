@@ -15,6 +15,9 @@ deploy:
           image.repository: hello-service
         setValues:
           replicaCount: "1"
+    flags:
+      upgrade:
+        - --install
 portForward:
   - resourceType: deployment
     resourceName: hello-service
