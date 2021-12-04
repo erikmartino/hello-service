@@ -26,3 +26,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and publish Docker images
         run: skaffold build --default-repo=ghcr.io/${{ github.repository }}
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.2.0
+        with:
+          charts_dir: helm/hello-service
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
