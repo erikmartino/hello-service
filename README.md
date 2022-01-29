@@ -1,6 +1,6 @@
 # Hello World
 
-This is a hello world service for testing
+This is a hello world service for testing.
 
 ## Micronaut 3.1.1 Documentation
 
