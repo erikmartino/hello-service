@@ -1,3 +1,5 @@
+# Hello World
+
 ## Micronaut 3.1.1 Documentation
 
 - [User Guide](https://docs.micronaut.io/3.1.1/guide/index.html)
