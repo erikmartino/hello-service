@@ -20,6 +20,21 @@ micronaut {
     }
 }
 
+task editHelmChart(type: Copy) {
+    from("${projectDir}/helm/hello-service") {
+        exclude "**/values.yaml"
+    }
+    from("${projectDir}/helm/hello-service/values.yaml") {
+        filter({
+            it.replace('repository: hello-service', "repository: ${jib.to.image}")
+        })
+    }
+    into "${buildDir}/helm/hello-service"
+}
+
+tasks['jibDockerBuild'].dependsOn(editHelmChart)
+tasks['jib'].dependsOn(editHelmChart)
+
 dependencies {
     implementation("io.micronaut:micronaut-management")
     annotationProcessor("io.micronaut:micronaut-http-validation")
@@ -28,7 +43,6 @@ dependencies {
     implementation("javax.annotation:javax.annotation-api")
     runtimeOnly("ch.qos.logback:logback-classic")
     implementation("io.micronaut:micronaut-validation")
-
 }
 
 

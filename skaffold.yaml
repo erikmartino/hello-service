@@ -6,6 +6,8 @@ build:
       jib: {}
   tagPolicy:
     gitCommit: {}
+  local:
+    push: true
 deploy:
   helm:
     releases:
@@ -15,6 +17,9 @@ deploy:
           image.repository: hello-service
         setValues:
           replicaCount: "1"
+    flags:
+      upgrade:
+        - --install
 portForward:
   - resourceType: deployment
     resourceName: hello-service

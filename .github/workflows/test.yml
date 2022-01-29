@@ -1,0 +1,13 @@
+name: A test job
+on:
+  workflow_dispatch: {}
+  schedule: 
+  - cron: "30 * * * *"
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
+        with:
+          fetch-depth: 0
