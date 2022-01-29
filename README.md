@@ -1,5 +1,7 @@
 # Hello World
 
+This is a hello world service for testing
+
 ## Micronaut 3.1.1 Documentation
 
 - [User Guide](https://docs.micronaut.io/3.1.1/guide/index.html)
