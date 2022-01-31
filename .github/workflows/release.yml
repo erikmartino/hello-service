@@ -6,14 +6,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Tag
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          release_branch: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: K-Phoen/semver-release-action
         uses: K-Phoen/semver-release-action@master
         with:
           release_branch: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create a GitHub release
+
+      - name: ncipollo/release-action
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.tag_version.outputs.new_tag }}
@@ -21,4 +28,3 @@ jobs:
           body: ${{ steps.tag_version.outputs.changelog }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}

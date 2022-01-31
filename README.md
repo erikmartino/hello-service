@@ -1,3 +1,7 @@
+# Hello World
+
+This is a hello world service for testing and ci experiments. Testing the release drafter
+
 ## Micronaut 3.1.1 Documentation
 
 - [User Guide](https://docs.micronaut.io/3.1.1/guide/index.html)
