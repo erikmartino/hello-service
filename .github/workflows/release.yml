@@ -1,9 +1,7 @@
 name: Release
-
 on:
   pull_request:
     types: closed
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,6 +9,16 @@ jobs:
       - name: Tag
         uses: K-Phoen/semver-release-action@master
         with:
-          release_branch: master
+          release_branch: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
