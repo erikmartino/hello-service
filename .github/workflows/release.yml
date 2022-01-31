@@ -1,7 +1,8 @@
 name: Release
 on:
-  pull_request:
-    types: closed
+  push:
+    tags:
+      - v*.*.*
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -9,22 +10,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          release_branch: main
+          fetch-depth: 0
+      - name: version
+        id: version
+        run: |
+          tag=${GITHUB_REF/refs\/tags\//}
+          version=${tag#v}
+          major=${version%%.*}
+          echo "::set-output name=tag::${tag}"
+          echo "::set-output name=version::${version}"
+          echo "::set-output name=major::${major}"
+      - uses: release-drafter/release-drafter@master
+        with:
+          version: ${{ steps.version.outputs.version }}
+          publish: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: K-Phoen/semver-release-action
-        uses: K-Phoen/semver-release-action@master
-        with:
-          release_branch: main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: ncipollo/release-action
-        uses: ncipollo/release-action@v1
-        with:
-          tag: ${{ steps.tag_version.outputs.new_tag }}
-          name: Release ${{ steps.tag_version.outputs.new_tag }}
-          body: ${{ steps.tag_version.outputs.changelog }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: force update major tag
+        run: |
+          git tag v${{ steps.version.outputs.major }} ${{ steps.version.outputs.tag }} -f
+          git push origin refs/tags/v${{ steps.version.outputs.major }} -f
+          
