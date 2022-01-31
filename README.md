@@ -1,6 +1,6 @@
 # Hello World
 
-This is a hello world service for testing and ci experiments. Testing the release drafter
+This is a hello world service for testing and ci experiments. Testing the release process
 
 ## Micronaut 3.1.1 Documentation
 
