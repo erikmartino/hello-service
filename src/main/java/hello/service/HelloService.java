@@ -16,7 +16,7 @@ public class HelloService {
     public Map<String,Object> getGreeting() throws UnknownHostException {
         return Map.of("hostname", InetAddress.getLocalHost().getHostName(),
                 "greeting", "Hello",
-                "from", System.getProperty("user.name", "hello world"),
+                "from", System.getProperty("user.name", "Hello world"),
                 "date", new Date());
     }
 }
