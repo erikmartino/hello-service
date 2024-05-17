@@ -8,13 +8,12 @@ jobs:
   version:
     runs-on: ubuntu-latest
     outputs:
-      docker_tag: ${{ steps.version.outputs.docker_tag }}
+      docker_tag: ${{ env.DOCKER_TAG }}
     steps:
       - name: Get the release version
         run: |
           RELEASE_TAG="${{ github.event.release.tag_name }}"
-          DOCKER_TAG="${RELEASE_TAG#v}"
-          echo "::set-output name=docker_tag::$DOCKER_TAG"
+          DOCKER_TAG="${RELEASE_TAG#v}" >>$GITHUB_ENV
   docker:
     name: Docker
     needs:
