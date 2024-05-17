@@ -5,20 +5,22 @@ on:
     types: [published]
 
 jobs:
-  process-release:
+  version:
     runs-on: ubuntu-latest
+    outputs:
+      docker_tag: ${{ steps.version.outputs.docker_tag }}
     steps:
       - name: Get the release version
         run: |
           RELEASE_TAG=${{ github.event.release.tag_name }}"
           DOCKER_TAG=${RELEASE_TAG#v}
-          echo "DOCKER_TAG=$DOCKER_TAG" >> $GITHUB_ENV
+          echo "::set-output name=docker_tag::$DOCKER_TAG"
   docker:
     name: Docker
     needs:
-      - process-release
+      - version
     uses: ./.github/workflows/docker.yml
     secrets: inherit
     with:
-      version: ${{ env.DOCKER_TAG }}
+      version: ${{ needs.version.outputs.docker_tag }}
 
